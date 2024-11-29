@@ -1,0 +1,45 @@
+{
+    "products": [
+        {
+            "name": "Product 3 update",
+            "imageUrl": "https://picsum.photos/id/3/200/300",
+            "price": 7.99,
+            "inStock": true,
+            "category": "Category 1",
+            "id": 3
+        },
+        {
+            "id": 4,
+            "name": "Product 4",
+            "price": 12.99,
+            "inStock": true,
+            "imageUrl": "https://picsum.photos/id/4/200/300",
+            "category": "Category 3"
+        },
+        {
+            "id": 5,
+            "name": "Product 5",
+            "price": 9.99,
+            "inStock": false,
+            "imageUrl": "https://picsum.photos/id/5/200/300",
+            "category": "Category 2"
+        },
+        {
+            "name": "12313",
+            "imageUrl": "321321",
+            "price": 312312,
+            "inStock": true,
+            "category": "Danh mục 2",
+            "id": 6
+        }
+    ],
+    "users": [
+        {
+            "email": "admin@gmail.com",
+            "password": "$2a$10$At3C2e01BLGGCsRHTU5XwugvGg0ZFmKfe.LLBofd08kisNA8GSSkm",
+            "username": "1231",
+            "password2": "123456",
+            "id": 1
+        }
+    ]
+}
