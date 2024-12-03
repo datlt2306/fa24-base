@@ -14,49 +14,4 @@
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"
     ></script>
-
-    <script>
-        const fetchProducts = async () => {
-            try {
-                const response = await fetch(`http://localhost:3000/products`);
-                const data = await response.json();
-                renderProducts(data);
-            } catch (error) {
-                console.error("Failed to fetch products", error);
-            }
-        };
-
-        const renderProducts = (products) => {
-            const content = document.querySelector("#content");
-            content.innerHTML = products
-                .map(
-                    (item, index) => ` <tr>
-                    <td>${index + 1}</td>
-                    <td>${item.name}</td>
-                    <td>${item.price}</td>
-                    <td>
-                        <button onclick="removeItem(${item.id})">Xóa</button>
-                        <a href="./edit.html?id=${item.id}">Sửa</a>
-                    </td>
-                </tr>`
-                )
-                .join("");
-        };
-
-        const removeItem = async (id) => {
-            try {
-                const response = await fetch(`http://localhost:3000/products/${id}`, {
-                    method: "DELETE",
-                });
-                if (response.ok) {
-                    alert("Xóa sản phẩm thành công");
-                } else {
-                    console.error("Failed to delete item");
-                }
-            } catch (error) {
-                console.error("Failed to delete item", error);
-            }
-        };
-        fetchProducts();
-    </script>
 </body>
