@@ -1,6 +1,26 @@
-import { Link } from "react-router-dom";
+import axios from "axios";
+import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
+import { Link, useNavigate } from "react-router-dom";
 
 const ProductAdd = () => {
+    const navigate = useNavigate();
+    const {
+        register,
+        handleSubmit,
+        watch,
+        formState: { errors },
+    } = useForm();
+
+    const onSubmit = async (formData) => {
+        try {
+            await axios.post(`http://localhost:3000/products`, formData);
+            toast.success(`Thêm sản phẩm thành công`);
+            navigate("/products");
+        } catch (error) {
+            toast.error(error.response.data);
+        }
+    };
     return (
         <div className="offset-2 col-md-8">
             <div className="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
@@ -14,14 +34,21 @@ const ProductAdd = () => {
                 </div>
             </div>
 
-            <form>
+            <form onSubmit={handleSubmit(onSubmit)}>
                 <div className="mb-3 row">
                     <label htmlFor="name" className="col-sm-2 col-form-label text-end">
                         Tên sản phẩm
                     </label>
                     <div className="col-sm-10">
-                        <input type="text" className="form-control" id="name" />
-                        <div className="invalid-feedback d-block">Please choose a username.</div>
+                        <input
+                            type="text"
+                            className="form-control"
+                            id="name"
+                            {...register("name", { required: "Bắt buộc nhập!" })}
+                        />
+                        {errors.name && (
+                            <div className="invalid-feedback d-block">{errors.name.message}</div>
+                        )}
                     </div>
                 </div>
                 <div className="mb-3 row">
@@ -29,7 +56,21 @@ const ProductAdd = () => {
                         Giá
                     </label>
                     <div className="col-sm-10">
-                        <input type="number" className="form-control" id="price" />
+                        <input
+                            type="number"
+                            className="form-control"
+                            id="price"
+                            {...register("price", {
+                                required: "Bắt buộc nhập!",
+                                min: {
+                                    value: 0,
+                                    message: "Giá phải lớn hơn 0",
+                                },
+                            })}
+                        />
+                        {errors.price && (
+                            <div className="invalid-feedback d-block">{errors.price.message}</div>
+                        )}
                     </div>
                 </div>
                 <div className="mb-3 row">
@@ -37,19 +78,32 @@ const ProductAdd = () => {
                         URL Hình ảnh
                     </label>
                     <div className="col-sm-10">
-                        <input type="text" className="form-control" id="imageUrl" />
+                        <input
+                            type="text"
+                            className="form-control"
+                            id="imageUrl"
+                            {...register("imageUrl", { required: "Bắt buộc nhập!" })}
+                        />
                     </div>
+                    {errors.imageUrl && (
+                        <div className="invalid-feedback d-block">{errors.imageUrl.message}</div>
+                    )}
                 </div>
                 <div className="mb-3 row">
                     <label htmlFor="category" className="col-sm-2 col-form-label text-end">
                         Danh mục
                     </label>
                     <div className="col-sm-10">
-                        <select className="form-control" id="category" name="category" required>
+                        <select
+                            className="form-control"
+                            id="category"
+                            name="category"
+                            {...register("category")}
+                        >
                             <option value="">Chọn danh mục</option>
-                            <option value="1">Điện thoại</option>
-                            <option value="2">Laptop</option>
-                            <option value="3">Máy ảnh</option>
+                            <option value="Điện thoại">Điện thoại</option>
+                            <option value="Laptop">Laptop</option>
+                            <option value="Máy ảnh">Máy ảnh</option>
                         </select>
                     </div>
                 </div>
@@ -62,7 +116,9 @@ const ProductAdd = () => {
                                 type="checkbox"
                                 role="switch"
                                 id="flexSwitchCheckDefault"
+                                {...register("inStock")}
                             />
+                            <span>{watch("inStock") ? "Còn hàng" : "Hết hàng"}</span>
                         </div>
                     </div>
                 </div>
@@ -71,7 +127,13 @@ const ProductAdd = () => {
                         Mô tả
                     </label>
                     <div className="col-sm-10">
-                        <textarea name="" id="" className="form-control" rows="5"></textarea>
+                        <textarea
+                            name=""
+                            id=""
+                            className="form-control"
+                            rows="5"
+                            {...register("description")}
+                        ></textarea>
                     </div>
                 </div>
                 <div className="mb-3 row">
