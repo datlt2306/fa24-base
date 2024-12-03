@@ -1,4 +1,3 @@
-import React from "react";
 import { Link } from "react-router-dom";
 
 const ProductList = () => {
@@ -8,7 +7,7 @@ const ProductList = () => {
                 <h1 className="h2">Quản lý sản phẩm</h1>
                 <div className="btn-toolbar mb-2 mb-md-0">
                     <div className="btn-group me-2">
-                        <Link to="/products/add" className="btn btn-primary">
+                        <Link to="/products/add" className="btn btn-outline-primary">
                             Thêm sản phẩm
                         </Link>
                     </div>

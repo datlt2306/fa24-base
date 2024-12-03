@@ -9,7 +9,7 @@ const Layout = () => {
                 data-bs-theme="dark"
             >
                 <a className="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6 text-white" href="#">
-                    Kiểm tra WEB209
+                    Demo
                 </a>
                 <ul className="navbar-nav flex-row d-md-none">
                     <li className="nav-item text-nowrap">
@@ -66,7 +66,7 @@ const Layout = () => {
                         >
                             <div className="offcanvas-header">
                                 <h5 className="offcanvas-title" id="sidebarMenuLabel">
-                                    Kiểm tra WEB209
+                                    Demo
                                 </h5>
                                 <button
                                     type="button"
